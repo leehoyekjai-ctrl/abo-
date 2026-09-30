@@ -29,216 +29,9 @@ import { CreateRoomModal } from './components/CreateRoomModal';
 import { JoinApprovalModal } from './components/JoinApprovalModal';
 import { SupervisionAdminModal } from './components/SupervisionAdminModal';
 
-const DEFAULT_CONCENTRATIONS: ConcentrationPoint[] = [
-  {
-    id: 'conc-1',
-    time: '08:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0018,
-    threshold: 0.010,
-    status: 'safe',
-    method: '위상차현미경(PCM)',
-    deviceNo: 'PCM-Nikon-01',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '사전 배경농도(시공 전) 포집 결과 매우 양호',
-  },
-  {
-    id: 'conc-2',
-    time: '09:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0022,
-    threshold: 0.010,
-    status: 'safe',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A1',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '0.15mm 비닐 밀폐 및 음압기 시운전 중 측정',
-  },
-  {
-    id: 'conc-3',
-    time: '10:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0038,
-    threshold: 0.010,
-    status: 'safe',
-    method: '위상차현미경(PCM)',
-    deviceNo: 'PCM-Nikon-01',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '1층 급식실 천장 텍스 습식 해체 착수 직후 포집',
-  },
-  {
-    id: 'conc-4',
-    time: '11:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0055,
-    threshold: 0.010,
-    status: 'safe',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A1',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '조리실 및 배식대 구간 텍스 탈거 작업 진행 중',
-  },
-  {
-    id: 'conc-5',
-    time: '12:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0029,
-    threshold: 0.010,
-    status: 'safe',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A1',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '점심시간 작업 중단 및 음압 연속 가동 상태',
-  },
-  {
-    id: 'conc-6',
-    time: '13:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0062,
-    threshold: 0.010,
-    status: 'safe',
-    method: '위상차현미경(PCM)',
-    deviceNo: 'PCM-Nikon-01',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '오후 해체 작업 재개 및 배관 관통부 정밀 탈거',
-  },
-  {
-    id: 'conc-7',
-    time: '14:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0084,
-    threshold: 0.010,
-    status: 'warning',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A1',
-    inspector: '최측정 (에코그린연구소)',
-    notes: 'M-bar 천장틀 해체 중 국소적 미세농도 상승 (주의: 0.010 미만 유지)',
-  },
-  {
-    id: 'conc-8',
-    time: '15:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0048,
-    threshold: 0.010,
-    status: 'safe',
-    method: '위상차현미경(PCM)',
-    deviceNo: 'PCM-Nikon-01',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '헤파필터 진공청소기 흡진 및 잔재물 제거 작업',
-  },
-  {
-    id: 'conc-9',
-    time: '16:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0031,
-    threshold: 0.010,
-    status: 'safe',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A1',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '비산방지 고착제 살포 및 1차 밀봉 포장 완료',
-  },
-  {
-    id: 'conc-10',
-    time: '17:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0024,
-    threshold: 0.010,
-    status: 'safe',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A1',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '실내 공기 정화 및 음압 안정화 모니터링',
-  },
-  {
-    id: 'conc-11',
-    time: '18:00',
-    date: '2026-08-16',
-    zone: '본관 1층 급식실',
-    value: 0.0019,
-    threshold: 0.010,
-    status: 'safe',
-    method: '투과전자현미경(TEM)',
-    deviceNo: 'TEM-Hitachi-700',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '금일 해체작업 종료 후 최종 실내 공기질 적합 확인',
-  },
-  {
-    id: 'conc-z1',
-    time: '10:30',
-    date: '2026-08-16',
-    zone: '음압기 배기구',
-    value: 0.0015,
-    threshold: 0.010,
-    status: 'safe',
-    method: '위상차현미경(PCM)',
-    deviceNo: 'PCM-Nikon-01',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '음압기 HEPA 필터 후단 배기 공기 측정 (불검출 수준)',
-  },
-  {
-    id: 'conc-z2',
-    time: '14:15',
-    date: '2026-08-16',
-    zone: '음압기 배기구',
-    value: 0.0018,
-    threshold: 0.010,
-    status: 'safe',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A1',
-    inspector: '최측정 (에코그린연구소)',
-    notes: 'HEPA 필터 2중 여과 상태 정상 유지',
-  },
-  {
-    id: 'conc-z3',
-    time: '11:30',
-    date: '2026-08-16',
-    zone: '1층 복도 차단벽',
-    value: 0.0021,
-    threshold: 0.010,
-    status: 'safe',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A2',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '차단벽 외부 누출 검사 정상',
-  },
-  {
-    id: 'conc-z4',
-    time: '13:45',
-    date: '2026-08-16',
-    zone: '2층 교실 완충구역',
-    value: 0.0014,
-    threshold: 0.010,
-    status: 'safe',
-    method: '위상차현미경(PCM)',
-    deviceNo: 'PCM-Nikon-01',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '상부 교실 완충구역 비산 영향 전혀 없음',
-  },
-  {
-    id: 'conc-z5',
-    time: '15:30',
-    date: '2026-08-16',
-    zone: '학교 부지경계',
-    value: 0.0011,
-    threshold: 0.010,
-    status: 'safe',
-    method: '실시간 광학센서(OPC)',
-    deviceNo: 'OPC-2026-A3',
-    inspector: '최측정 (에코그린연구소)',
-    notes: '학교 정문 및 운동장 경계선 외부 환경 측정 (안전)',
-  },
-];
+import { DEFAULT_CONCENTRATIONS, DEFAULT_INSPECTIONS, DEFAULT_JOIN_REQUESTS } from './data/seed';
+import { DEFAULT_PROCESS_STEPS, type ProcessStep } from './data/processSteps';
+
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'monitoring' | 'process' | 'map'>('monitoring');
@@ -251,7 +44,7 @@ export default function App() {
   const [currentRoomId, setCurrentRoomId] = useState<string>('room-main');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [concentrations, setConcentrations] = useState<ConcentrationPoint[]>(DEFAULT_CONCENTRATIONS);
-  const [processSteps, setProcessSteps] = useState<any[]>([]);
+  const [processSteps, setProcessSteps] = useState<ProcessStep[]>([]);
   const [maps, setMaps] = useState<Record<string, string>>({});
   const [selectedFloor, setSelectedFloor] = useState<string>('1층');
   const [onlineCount, setOnlineCount] = useState<number>(1);
@@ -259,165 +52,9 @@ export default function App() {
   const [unreadCount, setUnreadCount] = useState<number>(0);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const [inspections, setInspections] = useState<SupervisionInspection[]>([
-    {
-      id: 'insp-1',
-      stage: '보양밀폐',
-      stageNumber: 1,
-      title: '1층 급식실 0.15mm 비닐 2중 밀폐·보양 및 차압 검사',
-      zone: '본관 1층 급식실 및 조리실',
-      targetDate: '2026-08-16',
-      status: '적합승인',
-      measuredValue: '차압: -0.054 mmH2O (법정기준 -0.050 mmH2O 충족)',
-      criteria: '벽체 0.15mm 1겹 / 바닥 0.15mm 2겹 밀폐, 음압 유지',
-      checkpoints: [
-        { id: 'cp-1-1', label: '비닐 두께 0.15mm 이상 및 2중 겹침 폭 30cm 이상 테이핑', passed: true },
-        { id: 'cp-1-2', label: '창문, 환기구, 배관 관통부 틈새 우레탄폼 및 테이핑 밀폐', passed: true },
-        { id: 'cp-1-3', label: '음압기 연속 가동 및 디지털 차압계 정상 기록 작동', passed: true },
-        { id: 'cp-1-4', label: '외부 출입통제선 및 석면해체 경고표지판(노란색) 설치', passed: true },
-      ],
-      inspectorName: '박감리',
-      inspectorRole: '특급 감리원',
-      inspectorLicense: '석면감리원 제2021-0941호',
-      inspectorAgency: '(주)한국석면관리연구원',
-      judgmentNotes: '0.15mm 비닐 2중 보양 및 차압(-0.054 mmH2O) 실측 결과 학교 석면안전관리지침 전 항목 적합 판정함. 본관 1층 텍스 해체 작업 착수 승인.',
-      judgedAt: '08:45',
-      documentNumber: '늘푸른고-감리-2026-001',
-    },
-    {
-      id: 'insp-2',
-      stage: '위생설비',
-      stageNumber: 2,
-      title: '위생설비 3실(탈의실-샤워실-갱의실) 설치 및 여과 필터 검사',
-      zone: '1층 급식실 주 출입구',
-      targetDate: '2026-08-16',
-      status: '적합승인',
-      measuredValue: '샤워실 5㎛ 정화 필터 장착 및 음압 정상 형성',
-      criteria: '3실 연속 구조, 불침투성 차단막, 온·냉수 샤워시설, 5㎛ 여과필터',
-      checkpoints: [
-        { id: 'cp-2-1', label: '탈의실-샤워실-갱의실 3실 연속 배치 및 에어록 커튼 구조', passed: true },
-        { id: 'cp-2-2', label: '샤워 배수 오염수 5㎛ 정화필터 장치 연결 확인', passed: true },
-        { id: 'cp-2-3', label: '헤파(HEPA) 장착 진공청소기 및 손·신발 세척 설비 비치', passed: true },
-      ],
-      inspectorName: '박감리',
-      inspectorRole: '특급 감리원',
-      inspectorLicense: '석면감리원 제2021-0941호',
-      inspectorAgency: '(주)한국석면관리연구원',
-      judgmentNotes: '위생설비 3실 밀폐 및 오염수 여과 필터 적합 판정.',
-      judgedAt: '09:05',
-      documentNumber: '늘푸른고-감리-2026-002',
-    },
-    {
-      id: 'insp-3',
-      stage: '작업원적격',
-      stageNumber: 3,
-      title: '작업원 특수건강검진·기초안전교육 및 보호장구 검사',
-      zone: '현장 출입 전원 (작업공 6명, 보양공 4명)',
-      targetDate: '2026-08-16',
-      status: '대기',
-      measuredValue: '전동식 방진마스크(PAPR) 착용 및 밀착도 검사 대기',
-      criteria: '석면특수건강진단 적격, 기초안전보건교육 이수, 전동식 방진마스크 착용',
-      checkpoints: [
-        { id: 'cp-3-1', label: '작업원 전원 특수건강진단 결과표 적격 판정 확인', passed: true },
-        { id: 'cp-3-2', label: '한국산업안전보건공단 건설업 기초안전보건교육 이수증 확인', passed: true },
-        { id: 'cp-3-3', label: '전동식 반면형 마스크(PAPR) 및 불침투성 보호복 착용 적정성', passed: true },
-      ],
-      inspectorName: '박감리',
-      inspectorRole: '특급 감리원',
-      inspectorLicense: '석면감리원 제2021-0941호',
-      inspectorAgency: '(주)한국석면관리연구원',
-      documentNumber: '늘푸른고-감리-2026-003',
-    },
-    {
-      id: 'insp-4',
-      stage: '잔재물검사',
-      stageNumber: 4,
-      title: '천장 텍스 해체 후 잔재물 육안검사 및 HEPA 진공흡진 확인',
-      zone: '본관 1층 급식실 전 구역 천장틀',
-      targetDate: '2026-08-16',
-      status: '대기',
-      measuredValue: '텍스 전량 탈거 후 M-bar / T-bar 잔재물 육안 검사 예정',
-      criteria: '천장틀, 벽면, 바닥 석면 잔재물 불검출 및 고착제 살포',
-      checkpoints: [
-        { id: 'cp-4-1', label: '천장틀(M-bar, T-bar) 및 배관 상부 석면 조각 완전 제거 확인', passed: true },
-        { id: 'cp-4-2', label: '헤파필터 장착 고성능 청소기로 2회 이상 정밀 흡진 완료', passed: true },
-        { id: 'cp-4-3', label: '석면 비산방지 고착제(바인더) 균일 도포 상태 확인', passed: true },
-      ],
-      inspectorName: '박감리',
-      inspectorRole: '특급 감리원',
-      inspectorLicense: '석면감리원 제2021-0941호',
-      inspectorAgency: '(주)한국석면관리연구원',
-      documentNumber: '늘푸른고-감리-2026-004',
-    },
-    {
-      id: 'insp-5',
-      stage: '최종비산철거',
-      stageNumber: 5,
-      title: '실내 공기 중 석면농도 측정 적합 및 보양 비닐 철거 최종 승인',
-      zone: '본관 1층 급식실 실내 5개 지점',
-      targetDate: '2026-08-16',
-      status: '대기',
-      measuredValue: '농도 측정 대기 (법정 기준: 0.01개/cm³ 이하)',
-      criteria: '공기질 측정 0.01개/cm³ 이하 적합 시에만 보양재 철거 승인',
-      checkpoints: [
-        { id: 'cp-5-1', label: '고형화 폐기물 0.15mm 비닐 2중 포장 및 지정폐기물 스티커 부착', passed: true },
-        { id: 'cp-5-2', label: '환경측정기관 실내 석면농도 시험성적서(0.01개/cm³ 이하) 확인', passed: true },
-        { id: 'cp-5-3', label: '감리원 및 학부모 모니터링단 최종 입회 하에 보양 비닐 철거 승인', passed: true },
-      ],
-      inspectorName: '박감리',
-      inspectorRole: '특급 감리원',
-      inspectorLicense: '석면감리원 제2021-0941호',
-      inspectorAgency: '(주)한국석면관리연구원',
-      documentNumber: '늘푸른고-감리-2026-005',
-    },
-  ]);
+  const [inspections, setInspections] = useState<SupervisionInspection[]>(DEFAULT_INSPECTIONS);
 
-  const [joinRequests, setJoinRequests] = useState<ChatJoinRequest[]>([
-    {
-      id: 'req-1',
-      roomId: 'room-main',
-      name: '이영희',
-      phone: '010-8293-1940',
-      affiliation: '늘푸른고 학부모회',
-      role: '학부모 안심 모니터링단 대표',
-      fileName: '늘푸른고_학부모모니터링단_위촉장.pdf',
-      fileSize: '1.18 MB',
-      fileUrl: '#',
-      memo: '본관 1층 급식실 텍스 해체 참관 및 학부모 안심 모니터링 실시간 점검을 위해 단톡방 입장을 신청합니다.',
-      status: '대기',
-      requestedAt: '09:15',
-    },
-    {
-      id: 'req-2',
-      roomId: 'room-main',
-      name: '강태수',
-      phone: '010-5541-7823',
-      affiliation: '(주)한국안전이엔씨',
-      role: '석면해체 기능공 (특수건강검진 적격)',
-      fileName: '석면특수건강진단서_적격판정_강태수.pdf',
-      fileSize: '2.45 MB',
-      fileUrl: '#',
-      memo: '금일 본관 1층 급식실 텍스 습식 해체 조 작업자로 신규 투입되어 입장 신청합니다.',
-      status: '대기',
-      requestedAt: '09:25',
-    },
-    {
-      id: 'req-3',
-      roomId: 'room-main',
-      name: '이상철',
-      phone: '010-2341-9988',
-      affiliation: '(주)한국안전이엔씨',
-      role: '보양작업 팀장',
-      fileName: '기초안전보건교육이수증_이상철.pdf',
-      fileSize: '950 KB',
-      fileUrl: '#',
-      memo: '현장 비닐 보양(0.15mm) 및 위생설비 점검 총괄 입장 완료건',
-      status: '승인',
-      requestedAt: '08:10',
-      processedAt: '08:15',
-      processedBy: '늘푸른고 행정실',
-    },
-  ]);
+  const [joinRequests, setJoinRequests] = useState<ChatJoinRequest[]>(DEFAULT_JOIN_REQUESTS);
 
   const [currentUser, setCurrentUser] = useState<ChatUser>({
     id: 'user-manager',
@@ -430,6 +67,14 @@ export default function App() {
   });
 
   const wsRef = useRef<WebSocket | null>(null);
+  // WebSocket/interval 콜백은 첫 렌더의 값을 캡처하므로 최신 값은 ref로 읽는다.
+  const isOpenRef = useRef(isOpen);
+  const currentRoomIdRef = useRef(currentRoomId);
+  const currentUserRef = useRef(currentUser);
+  const isConnectedRef = useRef(false);
+  isOpenRef.current = isOpen;
+  currentRoomIdRef.current = currentRoomId;
+  currentUserRef.current = currentUser;
   const reconnectTimeoutRef = useRef<any>(null);
 
   // Show temporary toast
@@ -451,7 +96,7 @@ export default function App() {
         }
       }
 
-      const msgRes = await fetch(`/api/chat/messages?roomId=${currentRoomId}`);
+      const msgRes = await fetch(`/api/chat/messages?roomId=${currentRoomIdRef.current}`);
       if (msgRes.ok) {
         const msgData = await msgRes.json();
         if (msgData.messages) {
@@ -459,7 +104,7 @@ export default function App() {
         }
       }
 
-      const reqRes = await fetch(`/api/chat/join-requests?roomId=${currentRoomId}`);
+      const reqRes = await fetch(`/api/chat/join-requests?roomId=${currentRoomIdRef.current}`);
       if (reqRes.ok) {
         const reqData = await reqRes.json();
         if (reqData.requests) {
@@ -512,16 +157,16 @@ export default function App() {
 
       ws.onopen = () => {
         setIsConnected(true);
-        // Set user info
-        ws.send(JSON.stringify({
-          type: 'set_user',
-          user: currentUser,
-        }));
-        // Join room
-        ws.send(JSON.stringify({
-          type: 'join_room',
-          roomId: currentRoomId,
-        }));
+        isConnectedRef.current = true;
+        const user = currentUserRef.current;
+        const preset = ROLE_PRESETS.find((r) => r.role === user.userRole);
+        if (preset && (user.userRole === 'supervisor' || user.userRole === 'contractor')) {
+          // 재연결 시 서버 세션 권한이 초기화되므로 다시 인증한다.
+          ws.send(JSON.stringify({ type: 'auth_login', code: preset.code, role: user.userRole }));
+        } else {
+          ws.send(JSON.stringify({ type: 'set_user', user }));
+        }
+        ws.send(JSON.stringify({ type: 'join_room', roomId: currentRoomIdRef.current }));
       };
 
       ws.onmessage = (event) => {
@@ -567,7 +212,7 @@ export default function App() {
                 return [...prev, msg];
               });
 
-              if (!isOpen) {
+              if (!isOpenRef.current) {
                 setUnreadCount((c) => c + 1);
                 triggerToast(`💬 [${msg.sender.name}] ${msg.text.slice(0, 35)}...`);
               }
@@ -637,6 +282,7 @@ export default function App() {
 
       ws.onclose = () => {
         setIsConnected(false);
+        isConnectedRef.current = false;
         // Auto reconnect
         reconnectTimeoutRef.current = setTimeout(() => {
           connectWebSocket();
@@ -660,9 +306,9 @@ export default function App() {
     fetchInitialData();
     connectWebSocket();
 
-    // Background periodic refresh fallback
+    // WebSocket이 끊겨 있을 때만 REST로 주기 동기화
     const syncInterval = setInterval(() => {
-      fetchInitialData();
+      if (!isConnectedRef.current) fetchInitialData();
     }, 6000);
 
     return () => {
@@ -796,6 +442,7 @@ export default function App() {
         verifiedBy: currentUser.name,
         verificationNotes: notes,
       }));
+      return;
     } else {
       try {
         const res = await fetch(`/api/chat/join-requests/${requestId}`, {
@@ -815,6 +462,8 @@ export default function App() {
         }
       } catch (err) {
         console.warn('Failed to verify join request:', err);
+        triggerToast('⚠️ 서버에 연결할 수 없어 처리하지 못했습니다.');
+        return;
       }
     }
 
@@ -845,6 +494,7 @@ export default function App() {
         requestId,
         processedBy: currentUser.name,
       }));
+      return;
     } else {
       try {
         const res = await fetch(`/api/chat/join-requests/${requestId}`, {
@@ -863,6 +513,8 @@ export default function App() {
         }
       } catch (err) {
         console.warn('Failed to approve join request:', err);
+        triggerToast('⚠️ 서버에 연결할 수 없어 처리하지 못했습니다.');
+        return;
       }
     }
 
@@ -890,6 +542,7 @@ export default function App() {
         rejectReason: reason,
         processedBy: currentUser.name,
       }));
+      return;
     } else {
       try {
         const res = await fetch(`/api/chat/join-requests/${requestId}`, {
@@ -909,6 +562,8 @@ export default function App() {
         }
       } catch (err) {
         console.warn('Failed to reject join request:', err);
+        triggerToast('⚠️ 서버에 연결할 수 없어 처리하지 못했습니다.');
+        return;
       }
     }
 
@@ -965,6 +620,8 @@ export default function App() {
         notes,
         broadcastToChat,
       }));
+      triggerToast(`⚖️ [감리 판정] '${judgment}' 판정을 전송했습니다.`);
+      return;
     } else {
       fetch(`/api/supervision/inspections/${inspectionId}/judge`, {
         method: 'POST',
@@ -1063,6 +720,7 @@ export default function App() {
     triggerToast('🚨 [비상 경보] 비산농도 초과 경보가 단톡방에 공지되었습니다.');
   };
 
+  const stepList: ProcessStep[] = processSteps.length > 0 ? processSteps : DEFAULT_PROCESS_STEPS;
   const pendingApprovalCount = joinRequests.filter((r) => r.status === '대기').length;
   const pendingSupervisionCount = inspections.filter((i) => i.status === '대기').length;
 
@@ -1291,7 +949,7 @@ export default function App() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
               <div>
                 <h2 className="text-base font-bold text-slate-900">
-                  학교 석면 해체·제거 12단계 법정 공정 및 감리 검사 현황
+                  학교 석면 해체·제거 법정 공정 및 감리 검사 현황
                 </h2>
                 <p className="text-xs text-slate-500 mt-1">
                   석면안전관리법 및 교육부 가이드라인에 따른 사전준비, 밀폐보양, 습식해체, 잔재물검사 및 최종 공기질 승인 프로세스
@@ -1350,39 +1008,35 @@ export default function App() {
               ))}
             </div>
 
-            {/* 12-Step Process List */}
+            {/* Process Step List */}
             <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
-              <h3 className="text-sm font-bold text-slate-900">전체 12단계 법정 표준 프로세스</h3>
+              <h3 className="text-sm font-bold text-slate-900">전체 {stepList.length}단계 표준 프로세스 (비석면 선행 철거 포함)</h3>
               <div className="divide-y divide-slate-100 text-xs">
-                {(processSteps.length > 0
-                  ? processSteps
-                  : [
-                      { step: 1, title: '사전 조사 및 석면지도 확정', category: '사전준비', description: '정밀 석면조사 결과 확정 및 설명회' },
-                      { step: 2, title: '집기류 반출 및 부착물 사전 철거', category: '사전철거', description: '교실 집기 반출 및 에어컨 부착물 분리' },
-                      { step: 3, title: '위생설비(3실) 설치', category: '위생안전', description: '탈의-샤워-갱의 3실 및 5㎛ 여과필터 설치' },
-                      { step: 4, title: '바닥/벽체 0.15mm 불침투성 비닐 밀폐보양', category: '밀폐보양', description: '바닥 2겹, 벽체 1겹 밀폐보양 및 테이핑' },
-                      { step: 5, title: '음압기 가동 및 차압(-0.050 mmH2O) 기록', category: '음압유지', description: 'HEPA 필터 음압기 연속 가동' },
-                      { step: 6, title: '감리원 사전 보양 검사 승인', category: '감리승인', description: '특급 감리원 입회 전 항목 적합 서명' },
-                      { step: 7, title: '습식 해체·제거 (텍스 원형 분리)', category: '해체제거', description: '습윤제 충분히 살포 후 나사못 탈거' },
-                      { step: 8, title: '폐석면 2중 밀봉 포장 및 올바로시스템 인계', category: '폐기물', description: '0.15mm 비닐 2중 밀봉 및 지정폐기물 표지' },
-                      { step: 9, title: 'HEPA 청소기 정밀 흡진 및 고착제 살포', category: '잔재물청소', description: 'M-bar 상부 흡진 및 비산방지제 도포' },
-                      { step: 10, title: '감리원 및 학부모 모니터링단 잔재물 검사', category: '잔재물검사', description: '육안 정밀 검사 합격 확인' },
-                      { step: 11, title: '실내 비산농도 측정(0.010개/cm³ 이하) 및 보양 철거', category: '공기질검사', description: '환경측정원 공기질 적합성적서 확인' },
-                      { step: 12, title: '원상복구 재설치 및 감리완료보고서 발행', category: '복구완료', description: '전등 기구 복구 및 최종 완료보고' },
-                    ]
-                ).map((step: any) => (
+                {stepList.map((step) => (
                   <div key={step.step} className="py-3 flex items-start gap-4 hover:bg-slate-50 px-2 rounded-lg transition-colors">
                     <span className="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-700 font-bold font-mono flex items-center justify-center shrink-0 text-xs">
                       {step.step}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
                         <span className="font-bold text-slate-900">{step.title}</span>
-                        <span className="text-[10px] text-slate-500 font-medium px-1.5 py-0.5 bg-slate-100 rounded">
+                        <span
+                          className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${
+                            step.category === '선행철거' ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-500'
+                          }`}
+                        >
                           {step.category}
                         </span>
+                        {step.responsible && <span className="text-[10px] text-slate-400">담당: {step.responsible}</span>}
                       </div>
                       <p className="text-slate-500 text-xs mt-0.5">{step.description}</p>
+                      {step.checklist && step.checklist.length > 0 && (
+                        <ul className="mt-2 space-y-1 text-[11px] text-slate-600 list-disc pl-4">
+                          {step.checklist.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </div>
                 ))}
